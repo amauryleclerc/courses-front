@@ -1,0 +1,23 @@
+{
+  "name": "courses-front",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Amaury <amauryleclerc@hotmail.fr>"
+  ],
+  "license": "Apache-2.0",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-css-only": "^3.3.6"
+  }
+}
