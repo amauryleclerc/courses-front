@@ -18,6 +18,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-css-only": "^3.3.6"
+    "bootstrap-css-only": "^3.3.6",
+    "awesome-bootstrap-checkbox": "^0.3.7",
+    "font-awesome": "^4.5.0"
   }
 }

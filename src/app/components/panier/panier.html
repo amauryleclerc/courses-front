@@ -1,5 +1,15 @@
 <h3>Panier:</h3>
-<button (click)="debug()">debug</button>
 <div *ngIf="panier">
-    {{panier.produitsSelect[0].produit.libelle}}
+
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect">
+
+            <div class="checkbox checkbox-info checkbox-circle">
+                <input id="checkbox8" type="checkbox">
+                <label for="checkbox8">{{produitSelect.produit.libelle}}</label>
+            </div>
+
+        </li>
+    </ul>
+
 </div>
