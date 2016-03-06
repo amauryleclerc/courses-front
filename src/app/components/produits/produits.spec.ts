@@ -10,7 +10,7 @@ import {
   beforeEachProviders
 } from 'angular2/testing';
 import {provide} from 'angular2/core';
-import {Produits} from './produits';
+import {ProduitsComponent} from './produits.component';
 
 
 describe('Produits Component', () => {
@@ -19,7 +19,7 @@ describe('Produits Component', () => {
 
 
   it('should ...', injectAsync([TestComponentBuilder], (tcb:TestComponentBuilder) => {
-    return tcb.createAsync(Produits).then((fixture) => {
+    return tcb.createAsync(ProduitsComponent).then((fixture) => {
       fixture.detectChanges();
     });
   }));

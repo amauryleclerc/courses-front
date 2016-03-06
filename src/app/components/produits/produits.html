@@ -1,3 +1,7 @@
-<p>
-  produits Works!
-</p>
+<h3>Produits:</h3>
+  <ul>
+    <li *ngFor="#produit of produits">
+      {{ produit.libelle }}
+    </li>
+  </ul>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>

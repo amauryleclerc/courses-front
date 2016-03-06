@@ -10,7 +10,7 @@ import {
   beforeEachProviders
 } from 'angular2/testing';
 import {provide} from 'angular2/core';
-import {Panier} from './panier';
+import {PanierComponent} from './panier.component';
 
 
 describe('Panier Component', () => {
@@ -19,7 +19,7 @@ describe('Panier Component', () => {
 
 
   it('should ...', injectAsync([TestComponentBuilder], (tcb:TestComponentBuilder) => {
-    return tcb.createAsync(Panier).then((fixture) => {
+    return tcb.createAsync(PanierComponent).then((fixture) => {
       fixture.detectChanges();
     });
   }));
