@@ -1,1 +1,5 @@
 <h3>Panier:</h3>
+<button (click)="debug()">debug</button>
+<div *ngIf="panier">
+    {{panier.produitsSelect[0].produit.libelle}}
+</div>

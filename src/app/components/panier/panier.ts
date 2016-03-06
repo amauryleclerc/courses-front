@@ -1,6 +1,8 @@
-export class Panier {
+import {ProduitSelect} from './produitSelect';
+
+export class PanierProduit {
   constructor(
     public id:string,
-    public libelle:string) { }
+    public produitsSelect:ProduitSelect[]) { }
 }
 
