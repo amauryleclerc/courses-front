@@ -1,0 +1,17 @@
+<h3>
+  Ajout d'un produit
+</h3>
+
+<div class="input-group">
+   
+    <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" (ngModelChange)="onSearch()">
+     <span class="input-group-btn">
+        <button class="btn btn-default" type="button">+</button>
+      </span>
+</div>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="#produit of produits">
+      {{ produit.libelle }}
+    </li>
+  </ul>
+  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>

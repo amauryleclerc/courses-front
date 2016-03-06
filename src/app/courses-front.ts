@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ProduitsComponent} from './components/produits/produits.component';
+import {AddProduit} from './components/add-produit/add-produit';
 import {PanierComponent} from './components/panier/panier.component';
 import {ProduitService} from './components/produits/produit.service';
 import {PanierService} from './components/panier/panier.service';
@@ -16,7 +17,8 @@ import 'rxjs/Rx';
 })
 @RouteConfig([
     {path:'/panier', name: 'Panier', component: PanierComponent, useAsDefault: true},
-  {path:'/produits', name: 'Produits', component: ProduitsComponent}
+  {path:'/produits', name: 'Produits', component: ProduitsComponent},
+  {path:'/add-produit', name: 'AddProduit', component: AddProduit}
 ])
 export class CoursesFrontApp {
   defaultMeaning: number = 42;
