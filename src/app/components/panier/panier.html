@@ -1,12 +1,14 @@
-<h3>Panier:</h3>
+<h3>Panier</h3>
 <div *ngIf="panier">
-
+<button class="btn btn-default" (click)="archiver()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
+<a  [routerLink]="['AddProduit']" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect">
+        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect" (click)="produitSelect.pris = !produitSelect.pris">
 
-            <div class="checkbox checkbox-info checkbox-circle">
-                <input id="checkbox8" type="checkbox">
-                <label for="checkbox8">{{produitSelect.produit.libelle}}</label>
+            <div class="checkbox checkbox-info checkbox-circle" >
+               
+                <input  type="checkbox" [(ngModel)]="produitSelect.pris" >
+                <label >{{produitSelect.produit.libelle}} - {{produitSelect.produit.categorie.libelle}} - qte {{produitSelect.quantite}}   </label>
             </div>
 
         </li>

@@ -23,37 +23,42 @@ export class AddProduit {
     search: string;
     errorMessage: string;
     isNewProduit: boolean;
+    success:boolean;
     constructor(private _produitService: ProduitService, private _categorieService: CategorieService, private _panierService: PanierService) { }
     ngOnInit() {
         this.quantite = 1;
         this.isNewProduit = false;
+        this.success = false;
         this.getCategories();
         this.produitSelect = new ProduitSelect(null, false, 1, null);
     }
 
-
-
     onSearch() {
         console.log(this.search);
-        this._produitService.searchProduits(this.search)
-            .subscribe(
-            produits => this.produits = produits,
-            error => this.errorMessage = <any>error);
+        if (this.search == null || this.search === "") {
+            this.produits.length = 0;
+        } else {
+            this._produitService.searchProduits(this.search)
+                .subscribe(
+                produits => this.produits = produits,
+                error => this.errorMessage = <any>error);
+        }
+
     }
-    selectProduit(produit : Produit) {
-        console.log(produit);
+    selectProduit(produit: Produit) {
+        this.isNewProduit = false;
         this.produitSelect.produit = produit;
     }
     newProduit() {
         this.isNewProduit = true;
-        if(this.categories){
-              this.produitSelect.produit = new Produit(null, this.search, this.categories[0]);
-        }else{
-              this.produitSelect.produit = new Produit(null, this.search, null);
+        if (this.categories) {
+            this.produitSelect.produit = new Produit(null, this.search, this.categories[0]);
+        } else {
+            this.produitSelect.produit = new Produit(null, this.search, null);
         }
     }
-    onCategorieSelected(){
-        
+    onCategorieSelected(value: string) {
+        this.produitSelect.produit.categorie = this.categories.find((categorie) => { return categorie.id === value })
     }
 
     getCategories() {
@@ -62,11 +67,15 @@ export class AddProduit {
             categories => this.categories = categories,
             error => this.errorMessage = <any>error);
     }
-    ajouter(){
-          this._panierService.addProduit(this.produitSelect)
+    ajouter() {
+        this._panierService.addProduit(this.produitSelect)
             .subscribe(
-            res => console.log(res),
+            res => this.setSuccess(),
             error => this.errorMessage = <any>error);
+    }
+    setSuccess(){
+        this.success = true;
+        setTimeout(()=>{this.success = false}, 2000);
     }
 
 }

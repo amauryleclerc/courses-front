@@ -17,12 +17,18 @@ export class ProduitService {
             .do(data => console.log(data))
             .catch(this.handleError);
     }
-
+    updateProduit(produit: Produit) {
+        let headers = new Headers(); 
+        headers.append('Content-Type', 'application/json');
+        return this.http.put(this._produitsUrl, JSON.stringify(produit), { headers: headers })
+            .map(res => <Produit>res.json())
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
     searchProduits(search: string) {
         var searchParams = new URLSearchParams();
         searchParams.set('search', search);
-      //  var r = new RequestOptionsArgs();
-        return this.http.get(this._produitsUrl + "/search", {search : searchParams})
+        return this.http.get(this._produitsUrl + "/search", { search: searchParams })
             .map(res => <Produit[]>res.json())
             .do(data => console.log(data))
             .catch(this.handleError);

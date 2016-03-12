@@ -11,10 +11,16 @@ export class PanierService {
 
 
     private _panierUrl = 'http://localhost:8090/api/panier';
-
+    private _panierArchiverUrl = 'http://localhost:8090/api/panier/archiver';
     getCurrent() {
         return this.http.get(this._panierUrl)
             .map(res => <PanierProduit>res.json())
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
+    archiver() {
+        return this.http.get(this._panierArchiverUrl)
+           // .map(res => <PanierProduit>res)
             .do(data => console.log(data))
             .catch(this.handleError);
     }

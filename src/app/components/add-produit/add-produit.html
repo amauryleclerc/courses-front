@@ -1,3 +1,8 @@
+<div>
+    <div class="alert alert-success" *ngIf="success">
+        <strong>Success!</strong> Produit ajouté avec succès
+    </div>
+</div>
 <h3>
   Ajout d'un produit
 </h3>
@@ -10,7 +15,7 @@
       </span>
 </div>
 <ul class="list-group">
-    <li class="list-group-item" *ngIf="search && search.length >0" (click)="newProduit()">
+    <li class="list-group-item" *ngIf="search && search.length >0 && !isNewProduit" (click)="newProduit()">
         Créer produit : {{ search }}
     </li>
     <li class="list-group-item" *ngFor="#produit of produits" (click)="selectProduit(produit)">
@@ -20,11 +25,9 @@
 <div *ngIf="produitSelect.produit && isNewProduit">
     <h3>Categorie :</h3>
     <div class="form-group">
-
-        <select class="form-control" [(ngModel)]="produitSelect.produit.categorie" (ngModelChange)="onCategorieSelected($event)">
-            <option *ngFor="#categorie of categories" [value]="categorie">{{categorie.libelle}}</option>
+        <select class="form-control" #cat [(ngModel)]="produitSelect.produit.categorie" (change)="onCategorieSelected(cat.value)">
+            <option *ngFor="#categorie of categories" [value]="categorie.id">{{categorie.libelle}}</option>
         </select>
-
     </div>
 </div>
 <div *ngIf="produitSelect.produit">
@@ -35,7 +38,8 @@
     <h3>Quantité :</h3>
     <input type="number" class="form-control" [(ngModel)]="quantite">
 </div>
+<br>
 <div>
-    <button type="button" class="btn btn-primary" (click)="ajouter()">Ajouter</button>
+    <button *ngIf="produitSelect.produit" type="button" class="btn btn-primary" (click)="ajouter()">Ajouter</button>
 </div>
 <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
