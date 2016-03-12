@@ -3,15 +3,39 @@
 </h3>
 
 <div class="input-group">
-   
+
     <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" (ngModelChange)="onSearch()">
-     <span class="input-group-btn">
+    <span class="input-group-btn">
         <button class="btn btn-default" type="button">+</button>
       </span>
 </div>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="#produit of produits">
-      {{ produit.libelle }}
+<ul class="list-group">
+    <li class="list-group-item" *ngIf="search && search.length >0" (click)="newProduit()">
+        Créer produit : {{ search }}
     </li>
-  </ul>
-  <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+    <li class="list-group-item" *ngFor="#produit of produits" (click)="selectProduit(produit)">
+        {{ produit.libelle }} - {{ produit.categorie.libelle }}
+    </li>
+</ul>
+<div *ngIf="produitSelect.produit && isNewProduit">
+    <h3>Categorie :</h3>
+    <div class="form-group">
+
+        <select class="form-control" [(ngModel)]="produitSelect.produit.categorie" (ngModelChange)="onCategorieSelected($event)">
+            <option *ngFor="#categorie of categories" [value]="categorie">{{categorie.libelle}}</option>
+        </select>
+
+    </div>
+</div>
+<div *ngIf="produitSelect.produit">
+    <h3>Produit sélectionné :</h3>
+    <p> {{produitSelect.produit.libelle}} - {{produitSelect.produit.categorie.libelle}}</p>
+</div>
+<div *ngIf="produitSelect.produit">
+    <h3>Quantité :</h3>
+    <input type="number" class="form-control" [(ngModel)]="quantite">
+</div>
+<div>
+    <button type="button" class="btn btn-primary" (click)="ajouter()">Ajouter</button>
+</div>
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>

@@ -1,29 +1,31 @@
 
 import {Injectable}     from 'angular2/core';
-import {Http, Response} from 'angular2/http';
+import {Http, Response, URLSearchParams, RequestOptionsArgs} from 'angular2/http';
 import {Headers, RequestOptions} from 'angular2/http';
-import {PanierProduit}           from './panier';
-import {ProduitSelect}           from './produitSelect';
+import {Categorie}           from './categorie';
 import {Observable}     from 'rxjs/Observable';
 @Injectable()
-export class PanierService {
+export class CategorieService {
     constructor(private http: Http) { }
 
 
-    private _panierUrl = 'http://localhost:8090/api/panier';
+    private _categorieUrl = 'http://localhost:8090/api/categorie';
+    private _categoriesUrl = 'http://localhost:8090/api/categories';
 
-    getCurrent() {
-        return this.http.get(this._panierUrl)
-            .map(res => <PanierProduit>res.json())
+    getCategories() {
+        return this.http.get(this._categoriesUrl)
+            .map(res => <Categorie[]>res.json())
             .do(data => console.log(data))
             .catch(this.handleError);
     }
-    addProduit(produit: ProduitSelect) {
+    addCategorie(categorie:Categorie) {
         let headers = new Headers(); headers.append('Content-Type', 'application/json');
-        return this.http.post(this._panierUrl, JSON.stringify(produit), { headers: headers })
+        return this.http.post(this._categorieUrl, JSON.stringify(categorie), {headers:headers})
+          //  .map((res: Response) => res.json())
             .do(data => console.log(data))
             .catch(this.handleError);
     }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

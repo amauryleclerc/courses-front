@@ -1,0 +1,39 @@
+<div>
+    <div class="alert alert-success" *ngIf="success" >
+        <strong>Success!</strong> Categorie ajouté avec succès
+    </div>
+</div>
+<div>
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #catForm="ngForm">
+        <h2>Nouvelle categorie</h2>
+        <div class="form-group">
+            <label for="libelle">Libelle</label>
+            <input type="text" class="form-control" required [(ngModel)]="categorie.libelle" ngControl="libelle" #libelle="ngForm">
+            <div [hidden]="libelle.valid || libelle.pristine" class="alert alert-danger">
+                Un libelle est requis
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!catForm.form.valid">Ajouter</button>
+
+    </form>
+    <button *ngIf="!active" type="button" class="btn btn-primary" (click)="newCategorie()">Nouvelle categorie</button>
+</div>
+
+<div>
+    <h2>Categories</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Libelle</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="#categorie of categories">
+                <td> {{categorie.libelle}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

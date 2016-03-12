@@ -18,14 +18,14 @@ export class ProduitsComponent implements OnInit {
     constructor(private _produitService: ProduitService) {
     }
     ngOnInit() {
-        this.getHeroes();
+        this.getProduits();
     }
-    getHeroes() {
+    getProduits() {
     //    this.produits = [{id:"1", libelle:"pomme"},{id:"2", libelle:"poire"}];
     
         this._produitService.getProduits()
                      .subscribe(
-                       heroes => this.produits = heroes,
+                       produits => this.produits = produits,
                        error =>  this.errorMessage = <any>error);
     }
 
