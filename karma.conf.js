@@ -23,7 +23,7 @@ module.exports = function(config) {
       {pattern: 'node_modules/angular2/bundles/http.dev.js', included: true, watched: true},
       {pattern: 'node_modules/angular2/bundles/router.dev.js', included: true, watched: true},
       {pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true},
-      
+          {pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true},
       {pattern: 'karma-test-shim.js', included: true, watched: true},
 
       // paths loaded via module imports
@@ -36,7 +36,10 @@ module.exports = function(config) {
 
       // paths to support debugging with source maps in dev tools
       {pattern: 'dist/**/*.ts', included: false, watched: false},
-      {pattern: 'dist/**/*.js.map', included: false, watched: false}
+      {pattern: 'dist/**/*.js.map', included: false, watched: false},
+      {pattern: 'dist/**/*.htaccess', included: false, watched: false},
+       {pattern: 'src/bower_components/pdfmake/build/*.js', included: false, watched: false}
+      
     ],
     proxies: {
       // required for component assets fetched by Angular's compiler

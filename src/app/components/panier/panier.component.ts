@@ -3,6 +3,8 @@ import {PanierProduit} from './panier';
 import {PanierService} from './panier.service';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {AddProduit} from '../add-produit/add-produit';
+declare var pdfMake: any;
+
 @Component({
     selector: 'panier',
     templateUrl: 'app/components/panier/panier.html',
@@ -23,15 +25,19 @@ export class PanierComponent implements OnInit {
             .subscribe(
             panier => this.panier = panier,
             error => this.errorMessage = <any>error);
-      
+
     }
-    debug(){
+    debug() {
         console.log(this.panier);
     }
-    archiver(){
-           this._panierService.archiver()
+    archiver() {
+        this._panierService.archiver()
             .subscribe(
             res => this.getPanier(),
             error => this.errorMessage = <any>error);
+    }
+    exporter() {
+        let docDefinition = { content: this.panier.produitsSelect.map((element)=>element.produit.libelle) };
+        pdfMake.createPdf(docDefinition).open();
     }
 }

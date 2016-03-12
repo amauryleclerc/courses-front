@@ -4,12 +4,13 @@ import {Http, Response, URLSearchParams, RequestOptionsArgs} from 'angular2/http
 import {Headers, RequestOptions} from 'angular2/http';
 import {Produit}           from './produit';
 import {Observable}     from 'rxjs/Observable';
+import {CoursesFrontApp}     from '../../courses-front';
 @Injectable()
 export class ProduitService {
     constructor(private http: Http) { }
 
 
-    private _produitsUrl = 'http://localhost:8090/api/produits';
+    private _produitsUrl = `${CoursesFrontApp.API_ENDPOINT}produits`;
 
     getProduits() {
         return this.http.get(this._produitsUrl)

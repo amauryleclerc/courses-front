@@ -4,13 +4,14 @@ import {Http, Response, URLSearchParams, RequestOptionsArgs} from 'angular2/http
 import {Headers, RequestOptions} from 'angular2/http';
 import {Categorie}           from './categorie';
 import {Observable}     from 'rxjs/Observable';
+import {CoursesFrontApp}     from '../../courses-front';
 @Injectable()
 export class CategorieService {
     constructor(private http: Http) { }
 
 
-    private _categorieUrl = 'http://localhost:8090/api/categorie';
-    private _categoriesUrl = 'http://localhost:8090/api/categories';
+    private _categorieUrl = `${CoursesFrontApp.API_ENDPOINT}categorie`;
+    private _categoriesUrl = `${CoursesFrontApp.API_ENDPOINT}categories`;
 
     getCategories() {
         return this.http.get(this._categoriesUrl)

@@ -9,6 +9,7 @@ import {CategorieService} from './components/categories/categorie.service';
 import {Categories} from './components/categories/categories';
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import 'rxjs/Rx';
+declare var pdfMake: any;
 
 @Component({
     selector: 'courses-front-app',
@@ -24,6 +25,8 @@ import 'rxjs/Rx';
     { path: '/categories', name: 'Categories', component: Categories }
 ])
 export class CoursesFrontApp {
-  
+ 
+   public static get API_ENDPOINT(): string { return 'http://192.168.1.37:8090/api/'; }
+
 
 }
