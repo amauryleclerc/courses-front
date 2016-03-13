@@ -3,17 +3,31 @@
     <a [routerLink]="['AddProduit']" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
     <button class="btn btn-info" (click)="exporter()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
     <button class="btn btn-danger" (click)="archiver()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect">
-
-            <div class="checkbox checkbox-info checkbox-circle">
-
-                <input type="checkbox" [(ngModel)]="produitSelect.pris">
-                <label  (click)="produitSelect.pris = !produitSelect.pris" >{{produitSelect.produit.libelle}} - {{produitSelect.produit.categorie.libelle}} - qte {{produitSelect.quantite}}
-                    </label>
-            </div>
-
-        </li>
-    </ul>
-
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Libelle</th>
+                    <th>Catégorie</th>
+                    <th>Quantité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#produitSelect of panier.produitsSelect #i=index">
+                    <td  >
+                        <div class="checkbox checkbox-info checkbox-circle">
+                            <input type="checkbox" [(ngModel)]="produitSelect.pris">
+                            <label></label>
+                        </div>
+                    </td>
+                    <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.produit.libelle}} </td>
+                    <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.produit.categorie.libelle}} </td>
+                    <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.quantite}} </td>
+                    <td>   <button class="btn btn-danger " (click)="supprimer(produitSelect)"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

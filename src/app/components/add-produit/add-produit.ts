@@ -41,7 +41,6 @@ export class AddProduit {
                 produits => this.produits = produits,
                 error => this.errorMessage = <any>error);
         }
-
     }
     selectProduit(produit: Produit) {
         this.isNewProduit = false;

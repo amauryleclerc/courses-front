@@ -3,6 +3,8 @@ import {PanierProduit} from './panier';
 import {PanierService} from './panier.service';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {AddProduit} from '../add-produit/add-produit';
+import {ProduitSelect} from './produitSelect';
+import {ProduitsSelectService} from './produits-select.service';
 declare var pdfMake: any;
 
 @Component({
@@ -16,7 +18,7 @@ declare var pdfMake: any;
 export class PanierComponent implements OnInit {
     panier: PanierProduit;
     errorMessage: string;
-    constructor(private _panierService: PanierService) { }
+    constructor(private _panierService: PanierService, private _produitsSelectService: ProduitsSelectService) { }
     ngOnInit() {
         this.getPanier();
     }
@@ -40,5 +42,12 @@ export class PanierComponent implements OnInit {
     exporter() {
         let docDefinition = { content: this.panier.produitsSelect.map((element)=>element.produit.libelle+" x"+element.quantite) };
         pdfMake.createPdf(docDefinition).open();
+    }
+    supprimer(produit: ProduitSelect){
+        
+          this._produitsSelectService.supprimer(produit)
+            .subscribe(
+            res => this.getPanier(),
+            error => this.errorMessage = <any>error);
     }
 }
