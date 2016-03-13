@@ -8,11 +8,8 @@
 </h3>
 
 <div class="input-group">
-
+    <span class="input-group-addon glyphicon glyphicon-search" ></span>
     <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" (ngModelChange)="onSearch()">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">+</button>
-      </span>
 </div>
 <ul class="list-group">
     <li class="list-group-item" *ngIf="search && search.length >0 && !isNewProduit" (click)="newProduit()">
@@ -36,7 +33,13 @@
 </div>
 <div *ngIf="produitSelect.produit">
     <h3>Quantité :</h3>
-    <input type="number" class="form-control" [(ngModel)]="quantite">
+    <div class="input-group spinner">
+        <input type="text" class="form-control" [(ngModel)]="produitSelect.quantite">
+        <div class="input-group-btn-vertical">
+            <button class="btn btn-default" type="button" (click)="produitSelect.quantite = produitSelect.quantite+1"><i class="fa fa-caret-up"></i></button>
+            <button class="btn btn-default" type="button" (click)="produitSelect.quantite = produitSelect.quantite-1"><i class="fa fa-caret-down"></i></button>
+        </div>
+    </div>
 </div>
 <br>
 <div>

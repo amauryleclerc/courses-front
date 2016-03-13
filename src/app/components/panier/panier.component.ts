@@ -31,13 +31,14 @@ export class PanierComponent implements OnInit {
         console.log(this.panier);
     }
     archiver() {
+        if(confirm("Etes vous sûr ?")){
         this._panierService.archiver()
             .subscribe(
             res => this.getPanier(),
-            error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error)}
     }
     exporter() {
-        let docDefinition = { content: this.panier.produitsSelect.map((element)=>element.produit.libelle) };
+        let docDefinition = { content: this.panier.produitsSelect.map((element)=>element.produit.libelle+" x"+element.quantite) };
         pdfMake.createPdf(docDefinition).open();
     }
 }

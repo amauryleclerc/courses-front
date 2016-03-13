@@ -19,14 +19,12 @@ export class AddProduit {
     produitSelect: ProduitSelect;
     produits: Produit[];
     categories: Categorie[];
-    quantite: number;
     search: string;
     errorMessage: string;
     isNewProduit: boolean;
-    success:boolean;
+    success: boolean;
     constructor(private _produitService: ProduitService, private _categorieService: CategorieService, private _panierService: PanierService) { }
     ngOnInit() {
-        this.quantite = 1;
         this.isNewProduit = false;
         this.success = false;
         this.getCategories();
@@ -48,6 +46,10 @@ export class AddProduit {
     selectProduit(produit: Produit) {
         this.isNewProduit = false;
         this.produitSelect.produit = produit;
+
+        this._panierService.getProduitSelect(produit.id).subscribe(
+            produitSelect =>  {if(produitSelect){this.produitSelect = produitSelect}},
+            error => this.errorMessage = <any>error);
     }
     newProduit() {
         this.isNewProduit = true;
@@ -73,9 +75,9 @@ export class AddProduit {
             res => this.setSuccess(),
             error => this.errorMessage = <any>error);
     }
-    setSuccess(){
+    setSuccess() {
         this.success = true;
-        setTimeout(()=>{this.success = false}, 2000);
+        setTimeout(() => { this.success = false }, 2000);
     }
 
 }

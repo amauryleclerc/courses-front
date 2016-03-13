@@ -15,13 +15,18 @@ export class CategorieService {
 
     getCategories() {
         return this.http.get(this._categoriesUrl)
-            .map(res => <Categorie[]>res.json())
+            .map(res => {
+                if (res.status == 200) {
+                    return <Categorie[]>res.json();
+                }
+                return null;
+            })
             .do(data => console.log(data))
             .catch(this.handleError);
     }
-    addCategorie(categorie:Categorie) {
+    addCategorie(categorie: Categorie) {
         let headers = new Headers(); headers.append('Content-Type', 'application/json');
-        return this.http.post(this._categorieUrl, JSON.stringify(categorie), {headers:headers})
+        return this.http.post(this._categorieUrl, JSON.stringify(categorie), { headers: headers })
           //  .map((res: Response) => res.json())
             .do(data => console.log(data))
             .catch(this.handleError);

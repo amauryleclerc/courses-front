@@ -1,15 +1,16 @@
 <h3>Panier</h3>
 <div *ngIf="panier">
-<button class="btn btn-default" (click)="archiver()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
-<a  [routerLink]="['AddProduit']" class="btn btn-primary" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-<button class="btn btn-primary" (click)="exporter()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+    <a [routerLink]="['AddProduit']" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+    <button class="btn btn-info" (click)="exporter()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+    <button class="btn btn-danger" (click)="archiver()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect" (click)="produitSelect.pris = !produitSelect.pris">
+        <li class="list-group-item" *ngFor="#produitSelect of panier.produitsSelect">
 
-            <div class="checkbox checkbox-info checkbox-circle" >
-               
-                <input  type="checkbox" [(ngModel)]="produitSelect.pris" >
-                <label >{{produitSelect.produit.libelle}} - {{produitSelect.produit.categorie.libelle}} - qte {{produitSelect.quantite}}   </label>
+            <div class="checkbox checkbox-info checkbox-circle">
+
+                <input type="checkbox" [(ngModel)]="produitSelect.pris">
+                <label  (click)="produitSelect.pris = !produitSelect.pris" >{{produitSelect.produit.libelle}} - {{produitSelect.produit.categorie.libelle}} - qte {{produitSelect.quantite}}
+                    </label>
             </div>
 
         </li>

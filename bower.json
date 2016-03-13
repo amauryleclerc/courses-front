@@ -21,6 +21,8 @@
     "bootstrap-css-only": "^3.3.6",
     "awesome-bootstrap-checkbox": "^0.3.7",
     "font-awesome": "^4.5.0",
-    "pdfmake": "^0.1.20"
+    "pdfmake": "^0.1.20",
+    "angular-bootstrap": "^1.2.4",
+    "moment": "momentjs#^2.12.0"
   }
 }
