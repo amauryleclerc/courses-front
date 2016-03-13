@@ -12,14 +12,16 @@ import {NgForm}    from 'angular2/common';
     pipes: []
 })
 export class Categories {
+    edit: number;
     categories: Categorie[];
     categorie: Categorie;
     errorMessage: string;
     active: boolean;
-    success:boolean;
+    success: boolean;
     constructor(private _categorieService: CategorieService) {
     }
     ngOnInit() {
+        this.edit = -1;
         this.active = false;
         this.success = false;
         this.categorie = new Categorie('', '');
@@ -42,8 +44,21 @@ export class Categories {
             categories => this.categories = categories,
             error => this.errorMessage = <any>error);
     }
-    setSuccess(){
-        this.success = true; 
-         setTimeout(()=>   this.success = false, 2000);
+    supprimer(categorie: Categorie) {
+        this._categorieService.supprimer(categorie)
+            .subscribe(
+            categories => this.getCategories(),
+            error => this.errorMessage = <any>error);
+    }
+    putCategorie(categorie: Categorie) {
+        this.edit = -1;
+        this._categorieService.updateCategorie(categorie)
+            .subscribe(
+            categories => this.getCategories(),
+            error => this.errorMessage = <any>error);
+    }
+    setSuccess() {
+        this.success = true;
+        setTimeout(() => this.success = false, 2000);
     }
 }

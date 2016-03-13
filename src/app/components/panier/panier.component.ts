@@ -44,10 +44,15 @@ export class PanierComponent implements OnInit {
         pdfMake.createPdf(docDefinition).open();
     }
     supprimer(produit: ProduitSelect){
-        
           this._produitsSelectService.supprimer(produit)
             .subscribe(
             res => this.getPanier(),
             error => this.errorMessage = <any>error);
+    }
+    trierParLibelle() {
+        this.panier.produitsSelect.sort((a: ProduitSelect, b: ProduitSelect) => a.produit.libelle.localeCompare(b.produit.libelle));
+    }
+    trierParCategorie() {
+        this.panier.produitsSelect.sort((a: ProduitSelect, b: ProduitSelect) => a.produit.categorie.libelle.localeCompare(b.produit.categorie.libelle));
     }
 }

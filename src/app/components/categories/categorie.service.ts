@@ -10,7 +10,7 @@ export class CategorieService {
     constructor(private http: Http) { }
 
 
-    private _categorieUrl = `${CoursesFrontApp.API_ENDPOINT}categorie`;
+
     private _categoriesUrl = `${CoursesFrontApp.API_ENDPOINT}categories`;
 
     getCategories() {
@@ -26,12 +26,25 @@ export class CategorieService {
     }
     addCategorie(categorie: Categorie) {
         let headers = new Headers(); headers.append('Content-Type', 'application/json');
-        return this.http.post(this._categorieUrl, JSON.stringify(categorie), { headers: headers })
-          //  .map((res: Response) => res.json())
+        return this.http.post(this._categoriesUrl, JSON.stringify(categorie), { headers: headers })
+            //  .map((res: Response) => res.json())
             .do(data => console.log(data))
             .catch(this.handleError);
     }
-
+    supprimer(categorie: Categorie) {
+        let headers = new Headers(); headers.append('Content-Type', 'application/json');
+        return this.http.delete(this._categoriesUrl + "/" + categorie.id, { headers: headers })
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
+     updateCategorie(categorie: Categorie) {
+        let headers = new Headers(); 
+        headers.append('Content-Type', 'application/json');
+        return this.http.put(this._categoriesUrl, JSON.stringify(categorie), { headers: headers })
+            .map(res => <Categorie>res.json())
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
