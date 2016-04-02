@@ -24,12 +24,12 @@ export class Categories {
         this.edit = -1;
         this.active = false;
         this.success = false;
-        this.categorie = new Categorie('', '');
+        this.categorie = new Categorie('', '',0);
         this.getCategories();
     }
     newCategorie() {
         this.active = true;
-        this.categorie = new Categorie('', '');
+        this.categorie = new Categorie('', '',0);
     }
     onSubmit() {
         this.active = false;
@@ -41,7 +41,7 @@ export class Categories {
     getCategories() {
         this._categorieService.getCategories()
             .subscribe(
-            categories => this.categories = categories,
+            categories => this.categories = categories.sort((a:Categorie,b:Categorie)=> a.position - b.position),
             error => this.errorMessage = <any>error);
     }
     supprimer(categorie: Categorie) {
@@ -60,5 +60,17 @@ export class Categories {
     setSuccess() {
         this.success = true;
         setTimeout(() => this.success = false, 2000);
+    }
+    up(categorie: Categorie){
+            this._categorieService.up(categorie)
+            .subscribe(
+            categories => this.getCategories(),
+            error => this.errorMessage = <any>error);
+    }
+    down(categorie: Categorie){
+            this._categorieService.down(categorie)
+            .subscribe(
+            categories => this.getCategories(),
+            error => this.errorMessage = <any>error);
     }
 }

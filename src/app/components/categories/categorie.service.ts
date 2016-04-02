@@ -31,6 +31,18 @@ export class CategorieService {
             .do(data => console.log(data))
             .catch(this.handleError);
     }
+    up(categorie: Categorie) {
+        let headers = new Headers(); headers.append('Content-Type', 'application/json');
+        return this.http.post(this._categoriesUrl+"/up", JSON.stringify(categorie), { headers: headers })
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
+    down(categorie: Categorie) {
+        let headers = new Headers(); headers.append('Content-Type', 'application/json');
+        return this.http.post(this._categoriesUrl+"/down", JSON.stringify(categorie), { headers: headers })
+            .do(data => console.log(data))
+            .catch(this.handleError);
+    }
     supprimer(categorie: Categorie) {
         let headers = new Headers(); headers.append('Content-Type', 'application/json');
         return this.http.delete(this._categoriesUrl + "/" + categorie.id, { headers: headers })

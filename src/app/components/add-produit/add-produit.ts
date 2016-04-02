@@ -59,7 +59,8 @@ export class AddProduit {
         }
     }
     onCategorieSelected(value: string) {
-        this.produitSelect.produit.categorie = this.categories.find((categorie) => { return categorie.id === value })
+        this.produitSelect.produit.categorie = this.categories.find((categorie) => { return categorie.id === value });
+        console.log(this.categories.find((categorie) => { return categorie.id === value }));
     }
 
     getCategories() {

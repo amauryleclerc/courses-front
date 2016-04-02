@@ -27,7 +27,7 @@ declare var pdfMake: any;
 ])
 export class CoursesFrontApp {
  
-   public static get API_ENDPOINT(): string { return 'http://192.168.1.37:8090/api/'; }
+   public static get API_ENDPOINT(): string { return 'http://leclerc.hd.free.fr:8090/api/'; }
 
 
 }
