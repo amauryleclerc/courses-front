@@ -4,11 +4,11 @@
     </div>
 </div>
 <h3>
-  Ajout d'un produit
+    Ajout d'un produit
 </h3>
 
 <div class="input-group">
-    <span class="input-group-addon glyphicon glyphicon-search" ></span>
+    <span class="input-group-addon glyphicon glyphicon-search"></span>
     <input type="text" class="form-control" placeholder="Rechercher" [(ngModel)]="search" (ngModelChange)="onSearch()">
 </div>
 <ul class="list-group">
@@ -39,7 +39,16 @@
             <button class="btn btn-default" type="button" (click)="produitSelect.quantite = produitSelect.quantite+1"><i class="fa fa-caret-up"></i></button>
             <button class="btn btn-default" type="button" (click)="produitSelect.quantite = produitSelect.quantite-1"><i class="fa fa-caret-down"></i></button>
         </div>
+        <input type="text" class="form-control" [(ngModel)]="produitSelect.unite" placeholder="unité">
     </div>
+</div>
+<div class="input-controls" *ngIf="produitSelect.produit">
+    <h3>Commentaire :</h3>
+    <textarea [(ngModel)]="produitSelect.commentaire"></textarea>
+</div>
+<div class="input-controls" *ngIf="produitSelect.produit">
+    <h3>Promotion :</h3>
+    <input #promo type="checkbox"  [(ngModel)]="produitSelect.promo"  />
 </div>
 <br>
 <div>

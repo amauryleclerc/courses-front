@@ -3,7 +3,7 @@
     <a [routerLink]="['AddProduit']" class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
     <button class="btn btn-info" (click)="exporter()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
     <button class="btn btn-danger" (click)="archiver()"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span></button>
-       <button class="btn btn-primary" (click)="trierParPosition()"><!--<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>-->Trier</button>
+    <button class="btn btn-primary" (click)="trierParPosition()"><!--<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>-->Trier</button>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -12,12 +12,13 @@
                     <th (click)="trierParLibelle()">Libelle</th>
                     <th (click)="trierParCategorie()">Catégorie</th>
                     <th>Quantité</th>
+                    <th>Promo</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="#produitSelect of panier.produitsSelect #i=index">
-                    <td  >
+                    <td>
                         <div class="checkbox checkbox-info checkbox-circle">
                             <input type="checkbox" [(ngModel)]="produitSelect.pris">
                             <label></label>
@@ -25,8 +26,11 @@
                     </td>
                     <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.produit.libelle}} </td>
                     <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.produit.categorie.libelle}} </td>
-                    <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.quantite}} </td>
-                    <td>   <button class="btn btn-danger " (click)="supprimer(produitSelect)"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
+                    <td (click)="produitSelect.pris = !produitSelect.pris">{{produitSelect.quantite}} {{produitSelect.unite}}</td>
+                    <td (click)="produitSelect.pris = !produitSelect.pris">
+                        <span  *ngIf="produitSelect.promo" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </td>
+                    <td> <button class="btn btn-danger " (click)="supprimer(produitSelect)"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td>
                 </tr>
             </tbody>
         </table>

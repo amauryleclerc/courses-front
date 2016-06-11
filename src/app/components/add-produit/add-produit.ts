@@ -26,9 +26,12 @@ export class AddProduit {
     constructor(private _produitService: ProduitService, private _categorieService: CategorieService, private _panierService: PanierService) { }
     ngOnInit() {
         this.isNewProduit = false;
+        this.produits = [];
+        this.categories = [];
+        this.search = "";
         this.success = false;
         this.getCategories();
-        this.produitSelect = new ProduitSelect(null, false, 1, null);
+        this.produitSelect = new ProduitSelect(null, false, 1, null, "","",false);
     }
 
     onSearch() {
@@ -38,7 +41,16 @@ export class AddProduit {
         } else {
             this._produitService.searchProduits(this.search)
                 .subscribe(
-                produits => this.produits = produits,
+                produits => {
+                    this.produits = produits;
+                    if (this.produits.filter((produit) => {
+                        return produit.libelle === this.search;
+                    }).length > 0) {
+                        this.isNewProduit = true;
+                    } else {
+                        this.isNewProduit = false;
+                    }
+                },
                 error => this.errorMessage = <any>error);
         }
     }
@@ -47,12 +59,12 @@ export class AddProduit {
         this.produitSelect.produit = produit;
 
         this._panierService.getProduitSelect(produit.id).subscribe(
-            produitSelect =>  {if(produitSelect){this.produitSelect = produitSelect}},
+            produitSelect => { if (produitSelect) { this.produitSelect = produitSelect } },
             error => this.errorMessage = <any>error);
     }
     newProduit() {
         this.isNewProduit = true;
-        if (this.categories) {
+        if (this.categories[0]) {
             this.produitSelect.produit = new Produit(null, this.search, this.categories[0]);
         } else {
             this.produitSelect.produit = new Produit(null, this.search, null);
@@ -76,6 +88,7 @@ export class AddProduit {
             error => this.errorMessage = <any>error);
     }
     setSuccess() {
+        this.ngOnInit();
         this.success = true;
         setTimeout(() => { this.success = false }, 2000);
     }
